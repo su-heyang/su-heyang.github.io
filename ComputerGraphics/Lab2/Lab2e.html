@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <title>taskE</title>
+    <script id="vertex-shader" type="x-shader/x-vertex">
+	attribute vec4 vPosition;
+	void main(){
+		gl_Position = vPosition;
+	}
+	</script>
+
+    <script id="fragment-shader" type="x-shader/x-fragment">
+	precision mediump float;
+	void main(){
+		gl_FragColor = vec4( 1.0, 0.0, 0.0, 1.0 );
+	}
+	</script>
+
+    <script type="text/javascript" src="../webgl-utils.js"></script>
+    <script type="text/javascript" src="../initShaders.js"></script>
+    <script type="text/javascript" src="../gl-matrix-min.js"></script>
+
+    <script type="text/javascript" src="Lab2taskE.js"></script>
+</head>
+
+<body>
+	请输入0~7的一个数字：<input type="range" id="taskC" min="0" max="7" value="0"/>
+	<input type='text' id="c" readonly="readonly" size="1" />
+	<br />
+	请输入0~360的一个旋转度数：<input type="range" id="taskE" min="0" max="360" step="1" value="0"/>
+	<input type='text' id="e" readonly="readonly" size="1" />
+	<br />
+    <canvas id="gl-canvas" width="512" height="512">你的浏览器不支持HTML5 canvas元素</canvas>
+</body>
+
+</html>
