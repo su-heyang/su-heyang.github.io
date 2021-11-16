@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-type" content="text/html;charset=utf-8">
+    <title>lab4-1</title>
+	<link rel="stylesheet" type="text/css" href="lab4-1.css" />
+    <!-- 顶点着色器 -->
+	<script id="rtvshader" type="x-shader/x-vertex">
+		attribute vec4 vPosition;
+		attribute vec4 vColor;
+		varying vec4 fColor;
+		
+		uniform vec3 theta;
+		uniform vec3 tran;
+		uniform vec3 zoom;
+		
+					
+		void main(){
+			// randians()函数，将角度转换为弧度
+			vec3 angles = radians(theta);
+			vec3 cost = cos(theta);
+			vec3 sint = sin(theta);
+						
+			vec4 p;
+						
+			// 计算沿 x, y, z 三轴转过弧度后的点的位置
+			mat4 rx = mat4(1.0, 0.0, 0.0, 0.0,
+						   0.0, cost.x, sint.x, 0.0,
+						   0.0, -sint.x, cost.x, 0.0,
+						   0.0, 0.0, 0.0, 1.0);
+				
+			mat4 ry = mat4(cost.y, 0.0, -sint.y, 0.0,
+						   0.0, 1.0, 0.0, 0.0,
+						   sint.y, 0.0, cost.y, 0.0,
+						   0.0, 0.0, 0.0, 1.0);
+						
+			mat4 rz = mat4(cost.z, sint.z, 0.0, 0.0,
+						   -sint.z, cost.z, 0.0, 0.0,
+						   0.0, 0.0, 1.0, 0.0,
+						   0.0, 0.0, 0.0, 1.0);
+			// 移动矩阵
+			mat4 mt = mat4(1.0, 0.0, 0.0, 0.0,
+							0.0, 1.0, 0.0, 0.0,
+						   0.0, 0.0, 1.0, 0.0,
+						   tran[0], tran[1], tran[2], 1.0);
+			// 缩放矩阵
+			mat4 Zoom = mat4(1.0+zoom[0], 0.0, 0.0, 0.0,
+							 0.0, 1.0+zoom[1], 0.0, 0.0,
+							 0.0, 0.0, 1.0+zoom[2], 0.0,
+							 0.0, 0.0, 0.0, 1.0);
+						
+			fColor = vColor;
+			gl_Position = vPosition;
+			gl_Position = rz * ry * rx * gl_Position;
+			gl_Position = Zoom * gl_Position;
+			gl_Position = mt * gl_Position;
+			
+			gl_Position.z = -gl_Position.z;
+		}
+	</script>
+	<!-- 片元着色器 -->
+    <script id="rtfshader" type="x-shader/x-fragment">
+	precision mediump float;
+	varying vec4 fColor;
+
+	void main()
+	{
+		gl_FragColor = fColor;
+	}
+	</script>
+    <script type="text/javascript" src="../webgl-utils.js"></script>
+    <script type="text/javascript" src="../initShaders.js"></script>
+    <script type="text/javascript" src="../gl-matrix-min.js"></script>
+    
+    <script type="text/javascript" src="Lab4-1.js"></script>
+</head>
+
+<body>
+	<table class="showboard">
+		<tr>
+			<th height="59px">展示页面</th>
+		</tr>
+		<tr>
+			<td>
+				<canvas id="rtcb-canvas" width="400px" height="400px">
+					你的浏览器不支持HTML5 canvas元素
+				</canvas>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+		</tr>
+	</table>
+	<table class="choiceboard">
+		<tr>
+			<th colspan="4" height="60px">操作按钮</th>
+		</tr>
+		<tr>
+			<td>状态：</td>
+			<!-- <td><input type="radio" id="status-static" name="status" checked="checked" />静止</td> -->
+			<td><input type="radio" id="status-rotate" name="status" checked="checked" />旋转</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>平移：</td>
+			<td><input type="button" id="translation-x+" value="x+" /></td>
+			<td><input type="button" id="translation-y+" value="y+" /></td>
+			<td><input type="button" id="translation-z+" value="z+" /></td>
+		</tr>
+		<tr>
+			<td style="border-top: 0px;"></td>
+			<td style="border-top: 0px;"><input type="button" id="translation-x-" value="x-" /></td>
+			<td style="border-top: 0px;"><input type="button" id="translation-y-" value="y-" /></td>
+			<td style="border-top: 0px;"><input type="button" id="translation-z-" value="z-" /></td>
+		</tr>
+		<tr>
+			<td>缩放：</td>
+			<td><input type="button" id="magnify" value="+" /></td>
+			<td><input type="button" id="shrink" value="-" /></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>控制方式：</td>
+			<!-- <td><input type="radio" value="键盘" name="controlway" />键盘</td> -->
+			<td><input type="radio" value="跟踪球" name="controlway" checked="checked" />跟踪球</td>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>
+	<table class="annotation">
+		<tr>
+			<td style="text-align: center;"><p>注：状态为旋转时，键盘按钮x、y、z控制正方体绕x、y、z轴旋转</p></td>
+		</tr>
+		
+	</table>
+</body>
+
+</html>

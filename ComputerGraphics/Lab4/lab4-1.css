@@ -1,0 +1,37 @@
+@charset "utf-8";
+.showboard{
+	width: 410px;
+	height: 520px;
+	font-family: '宋体';
+	border: black 2px solid;
+	float: left;
+}
+.showboard th{
+	text-align: center;
+	border-bottom: #000000 1px solid;
+}
+.choiceboard{
+	width: 410px;
+	height: 520px;
+	font-family: '宋体';
+	border: black 2px solid;
+	border-collapse: collapse;
+	border-spacing: 0;
+	float: left;
+}
+.choiceboard th{
+	text-align: center;
+}
+.choiceboard td{
+	width: 100px;
+	text-align: left;
+	border-top: #000000 1px solid;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+.annotation{
+	width: 820px;
+	font-family: "宋体";
+	border: #000000 2px solid;
+
+}
