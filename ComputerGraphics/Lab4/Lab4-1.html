@@ -78,64 +78,66 @@
 </head>
 
 <body>
-	<table class="showboard">
-		<tr>
-			<th height="59px">展示页面</th>
-		</tr>
-		<tr>
-			<td>
-				<canvas id="rtcb-canvas" width="400px" height="400px">
-					你的浏览器不支持HTML5 canvas元素
-				</canvas>
-			</td>
-		</tr>
-		<tr>
-			<td></td>
-		</tr>
-	</table>
-	<table class="choiceboard">
-		<tr>
-			<th colspan="4" height="60px">操作按钮</th>
-		</tr>
-		<tr>
-			<td>状态：</td>
-			<!-- <td><input type="radio" id="status-static" name="status" checked="checked" />静止</td> -->
-			<td><input type="radio" id="status-rotate" name="status" checked="checked" />旋转</td>
-			<td></td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>平移：</td>
-			<td><input type="button" id="translation-x+" value="x+" /></td>
-			<td><input type="button" id="translation-y+" value="y+" /></td>
-			<td><input type="button" id="translation-z+" value="z+" /></td>
-		</tr>
-		<tr>
-			<td style="border-top: 0px;"></td>
-			<td style="border-top: 0px;"><input type="button" id="translation-x-" value="x-" /></td>
-			<td style="border-top: 0px;"><input type="button" id="translation-y-" value="y-" /></td>
-			<td style="border-top: 0px;"><input type="button" id="translation-z-" value="z-" /></td>
-		</tr>
-		<tr>
-			<td>缩放：</td>
-			<td><input type="button" id="magnify" value="+" /></td>
-			<td><input type="button" id="shrink" value="-" /></td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>控制方式：</td>
-			<!-- <td><input type="radio" value="键盘" name="controlway" />键盘</td> -->
-			<td><input type="radio" value="跟踪球" name="controlway" checked="checked" />跟踪球</td>
-			<td></td>
-			<td></td>
-		</tr>
-	</table>
-	<table class="annotation">
-		<tr>
-			<td style="text-align: center;"><p>注：状态为旋转时，键盘按钮x、y、z控制正方体绕x、y、z轴旋转</p></td>
-		</tr>
-		
-	</table>
+	<div class="mainboard">
+		<table class="showboard">
+			<tr>
+				<th height="59px">展示页面</th>
+			</tr>
+			<tr>
+				<td>
+					<canvas id="rtcb-canvas" width="400px" height="400px">
+						你的浏览器不支持HTML5 canvas元素
+					</canvas>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+			</tr>
+		</table>
+		<table class="choiceboard">
+			<tr>
+				<th colspan="4" height="60px">操作按钮</th>
+			</tr>
+			<tr>
+				<td>状态：</td>
+				<!-- <td><input type="radio" id="status-static" name="status" checked="checked" />静止</td> -->
+				<td><input type="radio" id="status-rotate" name="status" checked="checked" />旋转</td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>平移：</td>
+				<td><input type="button" id="translation-x+" value="x+" /></td>
+				<td><input type="button" id="translation-y+" value="y+" /></td>
+				<td><input type="button" id="translation-z+" value="z+" /></td>
+			</tr>
+			<tr>
+				<td style="border-top: 0px;"></td>
+				<td style="border-top: 0px;"><input type="button" id="translation-x-" value="x-" /></td>
+				<td style="border-top: 0px;"><input type="button" id="translation-y-" value="y-" /></td>
+				<td style="border-top: 0px;"><input type="button" id="translation-z-" value="z-" /></td>
+			</tr>
+			<tr>
+				<td>缩放：</td>
+				<td><input type="button" id="magnify" value="+" /></td>
+				<td><input type="button" id="shrink" value="-" /></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>控制方式：</td>
+				<!-- <td><input type="radio" value="键盘" name="controlway" />键盘</td> -->
+				<td><input type="radio" value="跟踪球" name="controlway" checked="checked" />跟踪球</td>
+				<td></td>
+				<td></td>
+			</tr>
+		</table>
+		<table class="annotation">
+			<tr>
+				<td style="text-align: center;"><p>注：状态为旋转时，键盘按钮x、y、z控制正方体绕x、y、z轴旋转</p></td>
+			</tr>
+		</table>
+	</div>
+	
 </body>
 
 </html>

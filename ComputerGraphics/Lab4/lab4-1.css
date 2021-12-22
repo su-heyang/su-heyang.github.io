@@ -1,4 +1,8 @@
 @charset "utf-8";
+.mainboard{
+	width: 830px;
+	height: auto;
+}
 .showboard{
 	width: 410px;
 	height: 520px;
@@ -33,5 +37,5 @@
 	width: 820px;
 	font-family: "宋体";
 	border: #000000 2px solid;
-
+	float: left;
 }
