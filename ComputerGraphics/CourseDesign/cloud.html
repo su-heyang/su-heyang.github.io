@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>云深不知处</title>
+		<meta charset="utf-8">
+		<link type="text/css" rel="stylesheet" href="bg.css">
+		<script type="text/javascript" src="js/ga.js"></script>
+		<script type="text/javascript" src="js/three.min.js"></script>
+		<script type="text/javascript" src="js/Detector.js"></script>
+		<script type="text/javascript" src="js/three.js"></script>
+		<!--顶点着色器 -->
+		<script id="cloud-vs" type="x-shader/x-vertex">
+			varying vec3 vWorldPosition; //世界坐标系下的顶点坐标
+			varying vec2 vUv;
+			
+			void main() {
+				vUv = uv;
+				//世界坐标系下的顶点坐标=模型矩阵*建模坐标系下的顶点坐标
+				vec4 worldPosition = modelMatrix * vec4( position, 1.0 ); 
+				vWorldPosition = worldPosition.xyz;
+				//变换处理后的定点位置坐标=投影矩阵*模-视转换矩阵*建模坐标系下的顶点坐标
+				gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+			}
+		</script>
+		<!--片元着色器 -->
+		<script id="cloud-fs" type="x-shader/x-fragment">
+			uniform vec3 topColor;
+			uniform vec3 bottomColor;
+			uniform float offset;
+			uniform float exponent;
+			varying vec3 vWorldPosition;
+			uniform sampler2D map;
+			uniform vec3 fogColor;
+			uniform float fogNear;
+			uniform float fogFar;
+			varying vec2 vUv;
+			
+			void main() {
+				float depth = gl_FragCoord.z / gl_FragCoord.w;
+				float fogFactor = smoothstep( fogNear, fogFar, depth );
+
+				gl_FragColor = texture2D( map, vUv );
+				gl_FragColor.w *= pow( gl_FragCoord.z, 20.0 );
+				gl_FragColor = mix( gl_FragColor, vec4( fogColor, gl_FragColor.w ), fogFactor );
+
+			}
+		</script>
+	</head>
+	<body>
+		<div id="container"></div><!-- container用于显示网页运行的各个实时状态指标 -->
+		<script type="module" src="js/cloud.js"></script>
+	</body>
+</html>

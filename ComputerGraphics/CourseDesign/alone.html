@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>只见自身行</title>
+		<meta charset="utf-8">
+		<link type="text/css" rel="stylesheet" href="bg.css">
+		<script type="text/javascript" src="js/ga.js"></script>
+		<script type="text/javascript" src="js/three.min.js"></script>
+		<script type="text/javascript" src="js/Detector.js"></script>
+		<script type="text/javascript" src="js/three.js"></script>
+
+		<!--顶点着色器 -->
+		<script id="alone-vs" type="x-shader/x-vertex">
+			//世界坐标系下的顶点坐标
+			varying vec3 vWorldPosition;
+			
+			void main() {
+				//世界坐标系下的顶点坐标=模型矩阵*建模坐标系下的顶点坐标
+				vec4 worldPosition = modelMatrix * vec4( position, 1.0 );
+				vWorldPosition = worldPosition.xyz;
+				
+				//变换处理后的定点位置坐标=投影矩阵*模-视转换矩阵*建模坐标系下的顶点坐标
+				gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+			}
+		</script>
+		<!--片元着色器 -->
+		<script id="alone-fs" type="x-shader/x-fragment">
+			uniform vec3 topColor;
+			uniform vec3 bottomColor;
+			uniform float offset;
+			uniform float exponent;
+			varying vec3 vWorldPosition;
+		
+			void main() {
+				//根据offset分界线绘制天空和地面的颜色
+				float h = normalize( vWorldPosition + offset ).y;
+				gl_FragColor = vec4( mix( bottomColor, topColor, max( pow( max( h , 0.0), exponent ), 0.0 ) ), 1.0 );
+			}
+		</script>
+	</head>
+	<body>
+		<div id="container"></div><!-- container用于显示网页运行的各个实时状态指标 -->
+		<div id="info">
+			<button id="hemisphereButton">开/关 环境光</button>
+			<button id="directionalButton">开/关 平行光</button> 
+		</div>
+		<script type="module" src="js/alone.js"></script>
+	</body>
+</html>
