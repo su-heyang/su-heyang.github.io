@@ -1,21 +1,13 @@
 body {
-	background-color: #326696;
-	margin: 0px;
-	overflow: scroll;
-	font-family:Monospace;
-	font-size:13px;
-	text-align:center;
-	font-weight: bold;
-	text-align:center;
-	color: #444;
+	margin: 0;
+	background-color: #ffffff;
+	color: #ffffff;
+	font-family: Monospace;
+	font-size: 13px;
 	line-height: 24px;
 	overscroll-behavior: none;
 }
 
-a {
-	color: #0078ff;
-	text-decoration: none;
-}
 
 a:hover {
 	text-decoration: underline;
