@@ -132,7 +132,7 @@
                 video.width = 640;
                 video.height = 480;
                 const webcam = await tf.data.webcam(video);
-                const model = await tf.loadGraphModel('model.json');
+                const model = await tf.loadGraphModel('https://github.com/su-heyang/small_house/blob/main/model.json');
 
                 // Set initial recurrent state
                 let [r1i, r2i, r3i, r4i] = [tf.tensor(0.), tf.tensor(0.), tf.tensor(0.), tf.tensor(0.)];
